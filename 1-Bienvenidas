@@ -1,0 +1,12 @@
+
+response = Map();
+// newuser is a boolean which defines whether the user is a first time subscriber or not!
+if(newuser)
+{
+	response.put("text","Hey *" + user.get("first_name") + "* ! Thanks for subscribing!");
+}
+else
+{
+	response.put("text","Woohoo! Glad that you subscribed back! :wink:");
+}
+return response;

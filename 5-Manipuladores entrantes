@@ -1,0 +1,103 @@
+//Bot creado por mmanuel.e2e.
+//14/11/23 ultima actualizacion.
+//
+
+// Configure the bot's incoming webhook URL in any third-party service to trigger this handler.
+response = Map();
+//mesasge = {"text":body.description,"card": {"title": "Alert","theme": "modern-inline","thumbnail": "/cliq/help/restapi/images/announce_icon.png"}};
+payload = body.toMap();
+shortDescription = payload.get("description");
+longDescription = payload.get("long_description");
+title = payload.get("check_name");
+checkParams = payload.get("check_params");
+fullUrl = checkParams.get("full_url");
+importanceLevel = payload.get("importance_level");
+changedTime = payload.get("state_changed_utc_time");
+// parse time
+indexT = changedTime.indexOf("T");
+sideDate = changedTime.subString(0,indexT);
+sideTime = changedTime.subString(indexT + 1);
+parsedDateTime = sideDate + " " + sideTime;
+changedTime = toTime(parsedDateTime,"yyyy-MM-dd HH:mm:ss","Etc/UTC");
+// finish parse time
+DASHBOARD_URL = "https://my.pingdom.com/dashboard";
+currentState = payload.get("current_state");
+bodyMessage = "\nCheck name: " + title + "\nURL: " + fullUrl;
+if(currentState == "DOWN")
+{
+	bodyMessage = bodyMessage + "\nDowntime: " + changedTime.toString();
+	bodyMessage = bodyMessage + "\nImportance Level: " + importanceLevel;
+	bodyMessage = bodyMessage + "\nDescription: " + longDescription;
+}
+else
+{
+	bodyMessage = bodyMessage + "\nUptime: " + changedTime.toString();
+}
+bodyMessage = bodyMessage + "\n\n[View details](" + DASHBOARD_URL + ")";
+message = {"text":bodyMessage,"card":{"title":"Webpage " + currentState,"theme":"modern-inline"}};
+// define chat
+tags = payload.get("tags").toList();
+if(tags.contains("Example1"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample1","botpingdom",message);
+	//Crear canal "Example1"
+	//Example1=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example2"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample2","botpingdom",message);
+	//Crear canal "Example2"
+	//Example2=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example3"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomsaexample3","botpingdom",message);
+	//Crear canal "Example3"
+	//Example3=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example4"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample4","botpingdom",message);
+	//Crear Canal "Example4"
+	//Example4=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example5"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample5","botpingdom",message);
+	//Crear Canal "Example5"
+	//Example5=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example6"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample6","botpingdom",message);
+	//Crear Canal "Example6"
+	//Example6=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example7"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample7","botpingdom",message);
+	//Crear Canal "Example7"
+	//Example7=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example8"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample8","botpingdom",message);
+	//Crear Canal "Example8"
+	//Example8=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example9"))
+{
+	zoho.cliq.postToChannelAsBot("pingdomexample9","botpingdom",message);
+	//Crear Canal "Example9"
+	//Example9=CHANNEL boteepingdom= Bot
+}
+else if(tags.contains("Example10"))
+{
+Indica la licencia bajo la cual se distribuye el proyect: .
+	zoho.cliq.postToChannelAsBot("pingdomexample10","botpingdom",message);
+	//Crear Canal "Example10"
+	//Example10=CHANNEL boteepingdom= Bot
+}
+zoho.cliq.postToChannelAsBot("allalarmExampleFull","botpingdom",message);
+//El bot tiene que tener su canal principald"allalarmExampleFull" + nombre de bot "botpingdom"
+return response;

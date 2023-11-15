@@ -1,0 +1,28 @@
+
+response = Map();
+if(message.containsIgnoreCase("HI") || message.containsIgnoreCase("HEY"))
+{
+	text = "Hi! How you doin'? :wink:";
+	response.put("suggestions",{"list":{{"text":"I am great!"},{"text":"Meh!"}}});
+}
+else if(message.equals("I am great!"))
+{
+	text = "Glad to hear that! :smile:";
+}
+else if(message.equals("Meh!"))
+{
+	text = "Oops! Don't you worry. Your day is definitely going to get better. :grinning:";
+}
+else if(message.containsIgnoreCase("ticket"))
+{
+	//Try this case with the context handler. 
+	text = "Welcome to the Zylker Ticket Booking Portal! I'll need a few details to book the ticket.";
+	context = {"id":"personal_details","timeout":"300","params":{{"name":"name","question":"Please enter your name."},{"name":"age","question":"How old are you? :smile:"},{"name":"sex","question":"Gender:","suggestions":{"list":{{"text":"Male"},{"text":"Female"}}}}}};
+	response.put("context",context);
+}
+else
+{
+	text = "Messaging me for the first time? Come say a Hi ! :grinning:";
+}
+response.put("text",text);
+return response;

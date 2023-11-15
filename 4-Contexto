@@ -1,0 +1,11 @@
+
+response = Map();
+// This handler is triggered after collecting all the inputs specified by the context object in the message handler response. 
+if(context_id.equals("personal_details"))
+{
+	msgString = "Name : " + answers.get("name").get("text") + "\n";
+	msgString = msgString + "Age : " + answers.get("age").get("text") + "\n";
+	msgString = msgString + "Sex : " + answers.get("sex").get("text") + "\n";
+	response.put("text","Great! I've got all the info: \n" + msgString);
+}
+return response;
